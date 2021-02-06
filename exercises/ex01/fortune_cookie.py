@@ -14,7 +14,7 @@ from random import randint
 
 # Begin your solution here...
 print("Your fortune cookie says...")
-fortune_type: int = randint(1,4)
+fortune_type: int = randint(1, 4)
 
 if fortune_type == 1:
     print("Somebody once told me the world is NOT gonna roll you.")
