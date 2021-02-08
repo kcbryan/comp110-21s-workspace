@@ -6,7 +6,7 @@ __author__ = "730394055"
 # A datetime object models a specific date and time.
 #
 # Official Documentation: https://docs.python.org/3/library/datetime.html#datetime-objects
-from datetime import datetime
+from datetime import datetime, time
 
 # The timedelta data type is imported from the timedelta library.
 # A timedelta object models a "time span", such as 1 day or 1 hour and 3 minutes.
@@ -22,3 +22,12 @@ population: int = int(input("Population: "))
 compl_dose: int = int(input("Doses administered: "))
 daily_dose: int = int(input("Doses per day: "))
 target_pct: int = int(input("Target percent vaccinated: "))
+today: datetime = datetime.today()
+
+total_doses_desired: int = round(2 * population * target_pct / 100)
+remaining_doses_needed: int = total_doses_desired - compl_dose
+dose_delivery_int: int = round(remaining_doses_needed / daily_dose)
+dose_delivery_days: timedelta = timedelta(dose_delivery_int)
+immune_date: datetime = today + dose_delivery_days
+
+print("We will reach " + str(target_pct) + "% vaccination in " + str(dose_delivery_int) + " days, which falls on " + immune_date.strftime("%B %d, %Y") + ".")
