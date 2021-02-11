@@ -6,3 +6,5 @@ def yeet():
 yeet()
 
 
+def yeehaw() -> str: 
+    """A random test"""
