@@ -1,4 +1,8 @@
-"""Interactive game incorporating aspects from the movie and novel versions of Jane Austen's Pride and Prejudice."""
+"""An interactive game incorporating aspects from the movie and novel versions of Jane Austen's Pride and Prejudice. 
+For the first above and beyond criterion, I have created a while loop in the main function based on the variable 
+'play_game' that allows the player to rechoose any location or leave the game. For the second above and beyond
+criterion, I have included a fourth option called 'Meryton', in addition to the Netherfield option, Longbourn
+option, and leave game option."""
 
 __author__ = "730394055"
 
@@ -12,20 +16,21 @@ e_sparkle: str = "\U00002728"
 e_pensive: str = "\U0001F614"
 e_fearful: str = "\U0001F628"
 e_ribbon: str = "\U0001F380"
+e_dance_woman: str = "\U0001F483"
+e_dance_man: str = "\U0001F57A"
 
 
 def main() -> None:
     """Opening point for this program."""
+    greet()
     global points
     points = 1000
-    greet()
     exposition()
     play_game: str = input(f"\nDo you wish to continue engaging with this literary adventure, {player}? yes/no - ")
     while play_game == "yes":
-        print(f"\nLet us commence our plot, {player}! {e_flowers}")
-        print("To whence shall we first embark? Please enter a, b, or c")
-        choice: str = input("a- Ball at Netherfield Park\tb- Dinner at Longbourn\tc- Shopping in Meryton ? ")
-        print(f"\nAs a reminder, your current annuity is £{points}. Good luck!")
+        print(f"\nLet us commence, {player}! {e_flowers}")
+        print("To whence shall we embark? Please enter a, b, c, or d")
+        choice: str = input("a-Ball at Netherfield\tb-Dinner at Longbourn\tc-Shopping in Meryton\td-Leave Game ? ")
         if choice == "a":
             points = netherfield(points)
             choice = "Netherfield"
@@ -35,13 +40,21 @@ def main() -> None:
         if choice == "c":
             points = meryton(points)
             choice = "Meryton"
-        play_game = input(f"Thank you for visiting {choice}. Do you wish to continue playing? yes/no - ")
-    print(f"We are sorry to see you disembark, {player}.")
+        if choice == "d":
+            exit_game()
+            return
+        print(f"\nThank you for visiting {choice}. As a reminder, your current annuity is £{points}.")    
+        play_game = input("Do you wish to continue playing? yes/no - ")
+    exit_game()
+    return
+
+def exit_game() -> None:
+    print(f"\nWe are sorry to see you disembark, {player}.")
     if points < 1000:
         print(f"Unfortunately, {player}, your actions have diminished your annuity to £{points}.")
     if points == 1000:
         print(f"You shall leave this game with an annuity of £{points}.")
-    else:
+    if points > 1000:
         print(f"You have acted most prudently, {player}, and increased your annuity to £{points}!")
     print(f"We hope our game has bewitched you, body and soul. {e_wink} Farewell, {player}, and have a nice day!")
     return
@@ -56,7 +69,7 @@ def greet() -> None:
 
 def exposition() -> None:
     """More backgroud information about the game."""
-    print("\"It is a truth universally acknowledged...\" that anything is more fun when you add some Jane Austen! \n")
+    print("\n\"It is a truth universally acknowledged...\" that anything is more fun when you add some Jane Austen! \n")
     print("In this game you will encounter marriage proposals")
     print("and dance with the elegant ton, while avoiding sinister influences of wealth-seeking suitors and")
     print(f"overbearing mamas! You have a starting annuity of £{points}. Engaging with friends will increase")
@@ -67,11 +80,6 @@ def exposition() -> None:
     
 def netherfield(points_n: int) -> int:
     """Engage with friends and dance, earning or losing points based on dance partner."""
-    e_dance_woman: str = "\U0001F483"
-    e_dance_man: str = "\U0001F57A"
-    global e_gratitude
-    global e_music
-    global e_sparkle
     print(f"\nWelcome to Netherfield Park, {player}! Music swells around the happy assemblage, with a number of your")
     print("friends already engaged in the revelry.")
     points_n += 100
@@ -84,26 +92,32 @@ def netherfield(points_n: int) -> int:
         print("But alas, Mrs. Bennet is displeased you did not dance with any suitors,") 
         print(f"and has deducted some of your annuity. {e_pensive} ")
         print(f"However, do not let her get your spirits down, {player}.") 
-        print("Sincere friendship is of infinite value, beyond any annuity. {e_gratitude}")
+        print(f"Sincere friendship is of infinite value, beyond any annuity. {e_gratitude}")
         return points_n 
     else:
         print("\nThe string quartet crescendos, and the opening notes of your favorite song flit through the air") 
         print("as you reach the center of the crowd.")
         i: int = 0
         assent: str = dancing_partner()
-        while assent == "n" and i < 3:
+        while assent == "n" and i < 2:
             points_n -= 50
             print("Mrs. Bennet is displeased to see you being so discourteous,") 
             print(f"and has deducted from your annuity! {e_pensive}")
             assent = dancing_partner()
             i += 1 
-        print("You happily offer your hand, and are swept onto the dance floor!")
-        print(f"\n\t{e_sparkle}\t{e_music}\t{e_dance_man}\t{e_sparkle}\t{e_dance_woman}\t{e_music}\t{e_sparkle}")
-        points_n += 150
-        print("\nAfter a wonderful night of dancing, you contentedly return home.")
-        print("Mrs. Bennet was so thrilled to see you on the dance floor!")
-        print(f"So as an added bonus, she has increased your annuity to {points_n}! {e_sparkle}")
-        return points_n 
+        if i >= 2:
+            print("\nThe night is over, and Mrs. Bennet is furious that you danced with NO one!!")
+            points_n -= 300
+            print(f"As a result, she reduces your annuity to £{points_n}")
+            return points_n
+        else:
+            print("You happily offer your hand, and are swept onto the dance floor!")
+            print(f"\n\t{e_sparkle}\t{e_music}\t{e_dance_man}\t{e_sparkle}\t{e_dance_woman}\t{e_music}\t{e_sparkle}")
+            points_n += 150
+            print("\nAfter a wonderful night of dancing, you contentedly return home.")
+            print("Mrs. Bennet was so thrilled to see you on the dance floor!")
+            print(f"So as an added bonus, she has increased your annuity to £{points_n}! {e_sparkle}")
+            return points_n 
 
             
 def dancing_partner() -> str:
@@ -154,18 +168,18 @@ def longbourn() -> None:
 
 def meryton(points_m: int) -> int:
     """Gain/lose points while shopping in Meryton and coming across Mr. Wickham or Mr. Bingley."""
-    print(f"After a short walk with your sisters, you arrive at the shops in town. Welcome to Meryton, {player}!")
+    print(f"\nAfter a short walk with your sisters, you arrive at the shops in town. Welcome to Meryton, {player}!")
     print(f"You walk into the ribbon shop {e_ribbon}. You notice a familiar man in militia uniform by the counter.")
     approach: str = input(f"Do you want to converse with the man, {player}? yes/no - ")
     if approach == "yes":
         print("\nAs you walk over, the man turns around and you realize it is Mr. Wickham!")
-        print("After chatting convivially for a few minutes, Mr. Wickham becomes a bit sheepish.")
-        print(f"\n\"Forgive me, {player}, but I was wondering if I could borrow your AustenExpress card?\" he asks.")
+        print("\nAfter chatting convivially for a few minutes, Mr. Wickham becomes a bit sheepish.")
+        print(f"\"Forgive me, {player}, but I was wondering if I could borrow your AustenExpress card?\" he asks.")
         print("\"I've been dying to buy some new ribbons for my sister.\"")
         lending: str = input("Do you lend him your card? ")
         if lending == "yes":
             points_m = 0
-            print("As soon as you hand him your card, Mr. Wickham runs away chuckling evilly!")
+            print("\nAs soon as you hand him your card, Mr. Wickham runs away chuckling evilly!")
             print("He's stolen all of your annuity!")
             print(f"You'll never look at ribbons the same way again. {5*e_pensive} You return home, penniless.")
         else:
