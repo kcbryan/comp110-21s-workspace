@@ -1,8 +1,10 @@
-"""An interactive game incorporating aspects from the movie and novel versions of Jane Austen's Pride and Prejudice. 
+"""An interactive game incorporating aspects from the movie and novel versions of Jane Austen's Pride and Prejudice.
+
 For the first above and beyond criterion, I have created a while loop in the main function based on the variable 
 'play_game' that allows the player to rechoose any location or leave the game. For the second above and beyond
 criterion, I have included a fourth option called 'Meryton', in addition to the Netherfield option, Longbourn
-option, and leave game option."""
+option, and leave game option.
+"""
 
 __author__ = "730394055"
 
@@ -48,7 +50,9 @@ def main() -> None:
     exit_game()
     return
 
+
 def exit_game() -> None:
+    """Prints closing messages for game."""
     print(f"\nWe are sorry to see you disembark, {player}.")
     if points < 1000:
         print(f"Unfortunately, {player}, your actions have diminished your annuity to £{points}.")
@@ -69,8 +73,8 @@ def greet() -> None:
 
 def exposition() -> None:
     """More backgroud information about the game."""
-    print("\n\"It is a truth universally acknowledged...\" that anything is more fun when you add some Jane Austen! \n")
-    print("In this game you will encounter marriage proposals")
+    print("\n\"It is a truth universally acknowledged...\" that anything is more fun when you add some Jane Austen!")
+    print("\nIn this game you will encounter marriage proposals")
     print("and dance with the elegant ton, while avoiding sinister influences of wealth-seeking suitors and")
     print(f"overbearing mamas! You have a starting annuity of £{points}. Engaging with friends will increase")
     print("your annuity, whereas interactions with less genial counterparts will result in the")
@@ -105,7 +109,7 @@ def netherfield(points_n: int) -> int:
             print(f"and has deducted from your annuity! {e_pensive}")
             assent = dancing_partner()
             i += 1 
-        if i >= 2:
+        if assent == "n" and i >= 2:
             print("\nThe night is over, and Mrs. Bennet is furious that you danced with NO one!!")
             points_n -= 300
             print(f"As a result, she reduces your annuity to £{points_n}")
