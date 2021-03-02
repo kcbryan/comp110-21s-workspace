@@ -30,5 +30,5 @@ elaps_int: int = round(remaining_doses_needed / daily_dose)
 elaps_days: timedelta = timedelta(elaps_int)
 end_date: datetime = today + elaps_days
 
-print("We will reach " + str(target_pct) + "% vaccination in " + str(elaps_int) + " days, which falls on " 
-    + end_date.strftime("%B %d, %Y") + ".")
+print("We will reach " + str(target_pct) + "% vaccination in " + str(elaps_int) + " days, which falls on " + 
+    end_date.strftime("%B %d, %Y") + ".")

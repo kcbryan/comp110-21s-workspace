@@ -130,7 +130,7 @@ def dancing_partner() -> str:
     poss_partners = ["Mr. Darcy", "Mr. Bingley", "Mr. Wickham", "Miss Bingley", "Mr. Collins", "Miss King"] 
     from random import randint
     your_partner: str = poss_partners[randint(0, 5)]
-    assent: str = input(f"\n{your_partner} approaches you and asks you to dance. Do you offer them your hand? y/n - ")
+    assent: str = input(f"\n{your_partner} approaches and asks you to dance. Do you offer them your hand? yes/no - ")
     return assent 
 
 
@@ -153,7 +153,7 @@ def longbourn() -> None:
         print(f"Your mama sees you roll your eyes at Mr. Collins, and deducts from your annuity! {e_pensive}")
     print(f"\nThe next morning at breakfast, Mr. Collins requests a private audience with you! {3*e_fearful}")
     print("Before you have time to react, your mama shoos everyone out, and Mr. Collins gets down on one knee.")
-    proposal: str = input("Mr. Collins hands you a wilted flower, and asks you to marry him! What do you say? y/n - ")
+    proposal: str = input("Mr. Collins hands you a wilted flower, and proposes! What do you say? yes/no - ")
     if proposal == "y":
         points += 3000
         print("\nAfter hearing your assent, your mama bursts in filled with joy, and increases your annuity!")
@@ -180,7 +180,7 @@ def meryton(points_m: int) -> int:
         print("\nAfter chatting convivially for a few minutes, Mr. Wickham becomes a bit sheepish.")
         print(f"\"Forgive me, {player}, but I was wondering if I could borrow your AustenExpress card?\" he asks.")
         print("\"I've been dying to buy some new ribbons for my sister.\"")
-        lending: str = input("Do you lend him your card? ")
+        lending: str = input("Do you lend him your card? yes/no - ")
         if lending == "yes":
             points_m = 0
             print("\nAs soon as you hand him your card, Mr. Wickham runs away chuckling evilly!")
